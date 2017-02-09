@@ -53,6 +53,8 @@ gems:
 navbar:
   - slug : about
     title: About
+  - slug : bio
+    title: Bio
   - slug : blog
     title: Blog
 
