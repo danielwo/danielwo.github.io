@@ -2,7 +2,7 @@
 # SEO settings
 title: "Orthogonally Related"
 title2: "" # default: ""
-description: "Yet another blog."
+description: "Yet another blog"
 keywords: "blog, math, biology, research, data science"
 url: http://danielwo.github.io/ # site url
 # baseurl: "/thinkspace" # apply repo name if use it under gh-pages branch
@@ -11,7 +11,7 @@ baseurl: null # apply null if repo name is something like username.github.io
 google_analytics: UA-XXXXX-XX
 repo: https://github.com/danielwo/danielwo.github.io
 disqus_shortname: "danielwo-github-io"
-twitter_username: "a"
+twitter_username: "doct0r_dan"
 comments: true 
 
 # Build settings
@@ -31,19 +31,19 @@ sass:
 author:
   name     : "Daniel Wood"
   job      : "Mathematician"
-  bio      : "Blah blah blah."
-  thumb    : /images/author.jpg
+  bio      : "I am work in the modelling of HIV transmission dynamics."
+  thumb    : /images/me.jpg
   email    : dwood@fredhutch.org
   url      : http://danielwo.github.io
   github   : http://github.com/danielwo
-  twitter  : http://twitter.com/
-  facebook : https://www.facebook.com/
+  twitter  : http://twitter.com/doct0r_dan
+  facebook : https://www.facebook.com/daniel.wood.353803
   linkedin : https://www.linkedin.com/in/danieltwood/
 
 # social settings
 og_locale: "en_US"
 twitter_card: "summary_large_image"
-twitter_site: "@a"
+twitter_site: "@doct0r_dan"
 
 gems:
   - bourbon
