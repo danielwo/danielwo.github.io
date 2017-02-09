@@ -4,8 +4,6 @@ title: Bio
 permalink: /bio/
 ---
 
-If you are an employer, I am on the job market, so feel free to contact me.
-
 TODO: see linkedin, cv, research statement, teaching statement, resume, etc.
 <div class="divider"></div>
 
