@@ -684,6 +684,7 @@ dtype: float64
 
 Cool! Now for a given allocation of funds into a set of stocks we can calculate the value
 of a portfolio by first normalizing the data:
+
 ~~~python
 port_symbols = ['AAPL', 'IBM', 'GOOG']
 df_norm = normalize_data(df_norm[port_symbols])
@@ -734,6 +735,7 @@ print(df_norm.head().to_html())
 </table>
 
 multiplying the data by our initial allocations: 
+
 ~~~python
 start_value = 1000000 # initial amount of money to invest
 allocations = [0.5, 0.3, 0.2] # must add to 1
