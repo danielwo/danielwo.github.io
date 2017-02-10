@@ -7,7 +7,7 @@ keywords: "finance, trading, stocks, python, portfolio"
 ---
 
 I am going to start off with a small digression. I am a big fan of continued education
-from online sources. My favorite places too look are [Standford SEE](https://see.stanford.edu/),
+from online sources. My favorite places to look are [Standford SEE](https://see.stanford.edu/),
 [MIT OCW](https://ocw.mit.edu/), [Harvard OL](https://www.extension.harvard.edu/open-learning-initiative), 
 [coursera](https://www.coursera.org/) and [edX](https://www.edx.org/). If you want a 
 referesher on undergraduate probability theory, the best course I have found is 
@@ -16,7 +16,7 @@ Professor Joe Blitzstein at Harvard. He also helps run a data science course,
 [CS109](http://cs109.github.io/2015/index.html), which gives a nice introduction in using
 machine learning with Python. 
 
-This tutorial actually follows, [Machine Learning for Trading](https://classroom.udacity.com/courses/ud501/), a 
+This tutorial actually follows [Machine Learning for Trading](https://classroom.udacity.com/courses/ud501/), a 
 course on Udacity (not my favorite, sorry Udacity!), which you can take yourself and follow along. The course is by 
 Dr. Tucker Balch at Georgia Tech, but sadly doesn't actually link to any of the homework 
 files. However, you can find a short description of them
@@ -66,7 +66,7 @@ print("Scikit-Learn version:      %6.6s (my version: 0.18.1)" % sklearn.__versio
 import seaborn
 print("Seaborn version:          %6.6s  (my version: 0.7.1)" % seaborn.__version__)
 ~~~
-~~~
+>~~~
 Python version:            3.5.2  (my version: 3.5.2)
 Numpy version:             1.12.0 (my version: 1.12.0)
 SciPy version:             0.18.1 (my version: 0.18.1)
@@ -82,7 +82,7 @@ Even if you have pandas, you might not have [pandas_datareader](https://pandas-d
 so you may want to install that first. We will also be using [seaborn](http://seaborn.pydata.org/)
 which makes it much easier (at least for me) to make nice looking graphs. If you are unfamiliar
 with pandas, you may want to take some time to figure out how it works. If you've used 
-R, then pandas is basic functionality for dataframes.
+R, then pandas contains basic functionality for dataframes.
 
 Okay, so pandas_datareader will make our work much easier, since we won't have to deal with
 wondering how to get our hands on stock data. In particular, we will use the `get_data_yahoo()`
@@ -90,7 +90,7 @@ function download historical stock market data from Yahoo! Finance. In order to 
 we need to know the ticker symbol for the stock we are interested in (e.g. 'GOOG' for Google),
 the start date, and the unit of time between individual records (here we will be using days).
 
-We probably also want to save the data somewhere, so lets set up a function to get the
+We probably also want to save the data somewhere, so let's set up a function to get the
 path to our data:
 
 ~~~python
@@ -140,6 +140,166 @@ scrape_stock_data(symbols, start_date, end_date)
 ~~~
 
 Now we have a directory with stock data in it, so let's try to do some analysis on our data.
+First, lets print it to get an idea of what the data looks like:
 
-(I'm just starting this blog, so if you are reading this, just know this is for testing purposes, and 
-I haven't finished this!)
+~~~python
+df = pd.read_csv(symbol_to_path('GOOG'))
+print(df.head())
+~~~
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+      <th>Adj Close</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2016-01-04</td>
+      <td>743.000000</td>
+      <td>744.059998</td>
+      <td>731.257996</td>
+      <td>741.840027</td>
+      <td>3272800</td>
+      <td>741.840027</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016-01-05</td>
+      <td>746.450012</td>
+      <td>752.000000</td>
+      <td>738.640015</td>
+      <td>742.580017</td>
+      <td>1950700</td>
+      <td>742.580017</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-01-06</td>
+      <td>730.000000</td>
+      <td>747.179993</td>
+      <td>728.919983</td>
+      <td>743.619995</td>
+      <td>1947000</td>
+      <td>743.619995</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2016-01-07</td>
+      <td>730.309998</td>
+      <td>738.500000</td>
+      <td>719.059998</td>
+      <td>726.390015</td>
+      <td>2963700</td>
+      <td>726.390015</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-01-08</td>
+      <td>731.450012</td>
+      <td>733.229980</td>
+      <td>713.000000</td>
+      <td>714.469971</td>
+      <td>2450900</td>
+      <td>714.469971</td>
+    </tr>
+  </tbody>
+</table>
+
+The dataframe has seven columns, all of which tell us some interesting things about the
+stock, however we are going to only focus on two of them:
+
+1. Date: the day the stock was traded at
+2. Adj Close: the value of the stock at close, adjusted for dividends and stock splits to 
+allow for comparability across time.
+
+There are a couple things we have to take into consideration. Some stocks aren't traded
+everyday, and some might not even have existed during a given time period. It would be
+useful to have a stock we know is active which can be used as a measure of the market.
+We will use SPY, which is an ETF traded on the NYSE which follows the S&P 500. Lets make
+a function which adds in SPY, drops NA values and returns a dataframe of Adjusted Close
+for each of our stocks with the date as the index.
+
+~~~python
+def get_adj_close(symbols, start, end):
+    """Read stock data (adjusted close) for given symbols from CSV files.""" 
+    if isinstance(symbols, str): 
+        symbols = [symbols] # if string is passed in, place it in a list
+        
+    dates = pd.date_range(start, end).date
+    df = pd.DataFrame(index=dates)
+    if 'SPY' not in symbols:  # add SPY for reference, if absent
+        symbols.insert(0, 'SPY')
+
+    for symbol in symbols:
+        df_temp = pd.read_csv(symbol_to_path(symbol), index_col="Date", 
+                              parse_dates=True, usecols=['Date','Adj Close'])
+        df_temp = df_temp.rename(columns={'Adj Close': symbol})
+        df = df.join(df_temp) # use default how='left' 
+        
+    df = df.dropna()
+    return df
+~~~ 
+
+~~~python
+df = get_adj_close(symbols, start_date, end_date)
+print(df.head())
+~~~
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AAPL</th>
+      <th>SPY</th>
+      <th>IBM</th>
+      <th>GOOG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2016-01-04</th>
+      <td>103.057063</td>
+      <td>196.794026</td>
+      <td>129.932320</td>
+      <td>741.840027</td>
+    </tr>
+    <tr>
+      <th>2016-01-05</th>
+      <td>100.474523</td>
+      <td>197.126874</td>
+      <td>129.836755</td>
+      <td>742.580017</td>
+    </tr>
+    <tr>
+      <th>2016-01-06</th>
+      <td>98.508268</td>
+      <td>194.640278</td>
+      <td>129.186847</td>
+      <td>743.619995</td>
+    </tr>
+    <tr>
+      <th>2016-01-07</th>
+      <td>94.350769</td>
+      <td>189.970552</td>
+      <td>126.979099</td>
+      <td>726.390015</td>
+    </tr>
+    <tr>
+      <th>2016-01-08</th>
+      <td>94.849671</td>
+      <td>187.885326</td>
+      <td>125.803548</td>
+      <td>714.469971</td>
+    </tr>
+  </tbody>
+</table>
+
