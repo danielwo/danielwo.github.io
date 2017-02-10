@@ -5,7 +5,7 @@ permalink: /bio/
 ---
 
 <img src="/assets/images/me.jpg" width="240"/>
-Let's begin with my name: Daniel Wood. I earned my Ph.D. in mathematics from the University
+**Hello!** My name is Daniel Wood. I earned my Ph.D. in mathematics from the University
 of Texas at Arlington in 2015. As a graduate student I studied structure preserving numerical methods for 
 solving dynamical systems and the analysis of disease transmission models in the context
 of mathematical epidemiology. 
