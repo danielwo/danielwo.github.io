@@ -88,7 +88,7 @@ Okay, so pandas_datareader will make our work much easier, since we won't have t
 wondering how to get our hands on stock data. In particular, we will use the `get_data_yahoo()`
 function download historical stock market data from Yahoo! Finance. In order to use this function,
 we need to know the ticker symbol for the stock we are interested in (e.g. 'GOOG' for Google),
-the start date, and the unit of time between individual records (here we will be using days).
+the start date, the end date,  and the unit of time between individual records (here we will be using days).
 
 We probably also want to save the data somewhere, so let's set up a function to get the
 path to our data:
