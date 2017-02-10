@@ -1,4 +1,5 @@
-yout: post
+---
+layout: post
 title: "Yet Another Algorithmic Trading Tutorial (Part I)"
 description: "We use Python to visualize stock market data and optimize a portfolio based on historical data."
 comments: true
