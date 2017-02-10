@@ -24,6 +24,6 @@ concerts, exercise).
 <style> img { float: left; margin: 0 20px 20px 0; } </style>
 
 <div class="divider"></div>
-[Résumé (short) `[pdf]`](/assets/documents/resume_daniel_wood.pdf)<br>
-[Curriculum Vitae (long) `[pdf]`](/assets/documents/cv_daniel_wood.pdf)<br>
-[Research Statement `[pdf]`](/assets/documents/research_statement_daniel_wood.pdf)<br>
+[Résumé (short) [pdf]](/assets/documents/resume_daniel_wood.pdf)<br>
+[Curriculum Vitae (long) [pdf]](/assets/documents/cv_daniel_wood.pdf)<br>
+[Research Statement [pdf]](/assets/documents/research_statement_daniel_wood.pdf)<br>
