@@ -60,10 +60,6 @@ print("Pandas_datareader version: %6.6s (my version: 0.3.0)" % web.__version__)
 import matplotlib
 print("Mapltolib version:        %6.6s  (my version: 2.0.0)" % matplotlib.__version__)
 
-# SciKit Learn implements several Machine Learning algorithms
-import sklearn
-print("Scikit-Learn version:      %6.6s (my version: 0.18.1)" % sklearn.__version__)
-
 # Seaborn makes matplotlib look good and provides some plotting functions
 import seaborn
 print("Seaborn version:          %6.6s  (my version: 0.7.1)" % seaborn.__version__)
@@ -75,11 +71,10 @@ SciPy version:             0.18.1 (my version: 0.18.1)
 Pandas version:            0.19.2 (my version: 0.19.2)
 Pandas_datareader version: 0.3.0. (my version: 0.3.0)
 Mapltolib version:         2.0.0  (my version: 2.0.0)
-Scikit-Learn version:      0.18.1 (my version: 0.18.1)
 Seaborn version:           0.7.1  (my version: 0.7.1)
 ~~~
 
-As you can see we will be using numpy, scipy, pandas, matplotlib, scikit-learn and seaborn.
+As you can see we will be using numpy, scipy, pandas, matplotlib, and seaborn.
 Even if you have pandas, you might not have [pandas_datareader](https://pandas-datareader.readthedocs.io/en/latest/),
 so you may want to install that first. We will also be using [seaborn](http://seaborn.pydata.org/)
 which makes it much easier (at least for me) to make nice looking graphs. If you are unfamiliar
