@@ -533,8 +533,6 @@ plot_data(daily_ret[['SPY', 'IBM']], title="Daily Returns")
 
 <img src="/assets/images/trading_1/plot_5.png"/>
 
-It is a little hard to tell, but they appear to be tracking eachother pretty well. 
-
 One more statistic to check is the cumulative return. The cumulative return considers the signed percent change
 in stock price for an entire interval as opposed to a relative to the previous day. Generally,
 we care about the cumulative return over the entire period of interest.
