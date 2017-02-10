@@ -31,7 +31,7 @@ to trade stocks without EXTREME caution!
 <div class="divider"></div>
 
 I will be using Python 3 to do this analysis. You can find the associated python files
-here (TODO). You can check your Python libraries against mine using:
+[here](https://github.com/danielwo/algo-trading). You can check your Python libraries against mine using:
 
 ~~~python
 import sys
