@@ -661,7 +661,7 @@ stackexchange post.
 def compute_sharpe_ratio(daily_returns, annual_rf=0):
     """Computes Sharpe Ratio based on a daily approximation"""
     # annual_rf = 0 is an approximation of annual risk free rate
-    daily_rf = ((1 + annual_rf) - 1)**(1/252)  # approximation based on interest rate and 252 trading days
+    daily_rf = (1 + annual_rf)**(1/252) - 1 # approximation based on interest rate and 252 trading days
     K = (252)**(1/2) # assumes daily data
     sharpe_ratio = K *(daily_returns - daily_rf).mean() / (daily_returns - daily_rf).std()
     return sharpe_ratio
