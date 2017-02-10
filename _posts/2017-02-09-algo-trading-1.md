@@ -6,14 +6,14 @@ comments: true
 keywords: "finance, trading, stocks, python, portfolio"
 ---
 
-I am going to start off with a small digression. I am a big fan of continued education
+Since this is my first post, I am going to start off with a small digression. I am a big fan of continued education
 from online sources. My favorite places to look are [Standford SEE](https://see.stanford.edu/),
 [MIT OCW](https://ocw.mit.edu/), [Harvard OL](https://www.extension.harvard.edu/open-learning-initiative), 
 [coursera](https://www.coursera.org/) and [edX](https://www.edx.org/). If you want a 
 referesher on undergraduate probability theory, the best course I have found is 
 [STAT110](http://projects.iq.harvard.edu/stat110/home), a course by 
 Professor Joe Blitzstein at Harvard. He also helps run a data science course, 
-[CS109](http://cs109.github.io/2015/index.html), which gives a nice introduction in using
+[CS109](http://cs109.github.io/2015/index.html), which gives a nice introduction to using
 machine learning with Python. 
 
 This tutorial actually follows [Machine Learning for Trading](https://classroom.udacity.com/courses/ud501/), a 
@@ -21,7 +21,9 @@ course on Udacity (not my favorite, sorry Udacity!), which you can take yourself
 Dr. Tucker Balch at Georgia Tech, but sadly doesn't actually link to any of the homework 
 files. However, you can find a short description of them
 [here](http://quantsoftware.gatech.edu/Machine_Learning_for_Trading_Course). This 
-description will be what we use to develop our tools for this tutorial. Okay, let's get started!
+description will be what we use to develop our tools for this tutorial. In Part I, we will
+develop tools to visualize stock data, evaluate the performance of a portfolio and optimize
+a portfolio on historical data. Okay, let's get started!
 
 <div class="divider"></div>
 
@@ -30,7 +32,7 @@ to trade stocks without EXTREME caution!
 
 <div class="divider"></div>
 
-I will be using Python 3 to do this analysis. You can find the associated python files
+I will be using Python 3 to do this analysis. You can find the python files associated with this tutorial
 [here](https://github.com/danielwo/algo-trading). You can check your Python libraries against mine using:
 
 ~~~python
