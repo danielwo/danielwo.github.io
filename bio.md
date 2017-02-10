@@ -17,9 +17,8 @@ Seattle, Washington. At the Hutch, I work with statisticians, biologists, medica
 graduate students and others, in order to model HIV prevention interventions, with the 
 goal of finding ways to help fight the HIV epidemic.
 
-I enjoy recreational mathematics, participating in online MOOCs, playing music, 
-drinking coffee and a large subset of the things people tend to like (e.g. movies,
-concerts, exercise).
+I enjoy recreational mathematics, participating in MOOCs, playing music, drinking coffee 
+and a large subset of the things people tend to like (e.g. movies, concerts, exercise).
 <BR CLEAR="left"/>
 <style> img { float: left; margin: 0 20px 20px 0; } </style>
 
