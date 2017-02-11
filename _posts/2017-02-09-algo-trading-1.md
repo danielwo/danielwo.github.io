@@ -632,7 +632,7 @@ start_value = 1000000 # initial amount of money to invest
 allocations = [0.5, 0.3, 0.2] # must add to 1
 pt = Portfolio(df, port_symbols, start_value, allocations)
 print("Sharpe Ratio\n" + "==================\n" + str(pt.sharpe_ratio))
-print("Final Cumulative Return\n" + "===================\n" + str(pt.sharpe_ratio))
+print("\nFinal Cumulative Return\n" + "===================\n" + str(pt.final_cum_return))
 ~~~
 
 ~~~
@@ -640,10 +640,11 @@ Sharpe Ratio
 ==================
 Value    0.915735
 dtype: float64
+
 Final Cumulative Return
 ===================
-Value    0.915735
-dtype: float64
+Value    0.150251
+Name: 2016-12-30 00:00:00, dtype: float64
 ~~~
 
 We can use the `update` method to update the portfolio to new initial allocations. I also
@@ -654,7 +655,7 @@ our portfolio to the "market":
 new_alloc = [0.1, 0.1, 0.8]
 pt.update(new_alloc)
 print("Sharpe Ratio\n" + "==================\n" + str(pt.sharpe_ratio))
-print("Final Cumulative Return\n" + "===================\n" + str(pt.sharpe_ratio))
+print("\nFinal Cumulative Return\n" + "===================\n" + str(pt.final_cum_return))
 pt.plot_vs_spy()
 ~~~
 
@@ -663,10 +664,11 @@ Sharpe Ratio
 ==================
 Value    0.47621
 dtype: float64
+
 Final Cumulative Return
 ===================
-Value    0.47621
-dtype: float64
+Value    0.071464
+Name: 2016-12-30 00:00:00, dtype: float64
 ~~~
 
 <img src="/assets/images/trading_1/plot_10.png"/>
@@ -769,15 +771,23 @@ Now we can optimize our portfolio:
 ~~~python
 port_symbols = ['AAPL', 'IBM', 'GOOG']
 start_value = 1000000 # initial amount of money to invest
-allocations = [0.5, 0.3, 0.2] # must add to 1
+allocations = [0.1, 0.2, 0.7] # must add to 1
 pt = Portfolio(df, port_symbols, start_value, allocations)
-print(pt.final_cum_return)
+pt.analysis()
 ~~~
 
 ~~~
-Value    0.150251
-Name: 2016-12-30 00:00:00, dtype: float64
+Start Date: 2016-01-03
+End Date: 2016-12-29
+Symbols: ['AAPL', 'IBM', 'GOOG']
+Allocations: [0.1, 0.2, 0.7]
+Sharpe Ratio: 0.617229777047
+Volatility (stdev of daily returns): 0.0106923382945
+Average Daily Return: 0.000415737586147
+Cumulative Return: 0.0941713109724
 ~~~
+
+<img src="/assets/images/trading_1/plot_11.png">
 
 ~~~python
 pt.optimize()
@@ -795,7 +805,7 @@ Average Daily Return: 0.000989114258415
 Cumulative Return: 0.258616463303
 ~~~
 
-<img src="/assets/images/trading_1/plot_11.png"/>
+<img src="/assets/images/trading_1/plot_12.png"/>
 
 It looks like we beat the market! Congratulations! Of course, this is easy since hindsight
 is 20/20. We will look to use machine learning to come up with strategies to optimize future
