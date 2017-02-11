@@ -15,7 +15,7 @@ I am currently a postdoctoral research fellow in the
 [Vaccine and Infectious Disease Division](http://www.fredhutch.org/en/labs/vaccine-and-infectious-disease.html)
 at the Fred Hutchinson Cancer Research Center (otherwise known as "The Hutch") in 
 Seattle, Washington. At the Hutch, I work with statisticians, biologists, medical doctors,
-graduate students and others, in order to model HIV prevention interventions, with the 
+graduate students and others, in order to model HIV interventions, with the 
 goal of finding ways to help fight the HIV epidemic.
 
 I enjoy recreational mathematics, participating in MOOCs, playing music, drinking coffee 

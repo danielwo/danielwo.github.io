@@ -400,7 +400,7 @@ plot_data(daily_ret[['SPY', 'IBM']], title="Daily Returns")
 <img src="/assets/images/trading_1/plot_5.png"/>
 
 One more statistic to check is the cumulative return. The cumulative return considers the signed percent change
-in stock price for an entire interval as opposed to a relative to the previous day. Generally,
+in stock price for an entire interval as opposed to relative to the previous day. Generally,
 we care about the cumulative return over the entire period of interest.
 
 ~~~python
@@ -514,8 +514,8 @@ risk-adjusted return.
 $$ \text{Sharpe Ratio}  = \frac{E[R_{portfolio} - R_{risk-free}]}{\sqrt{\text{var}[R_{portfolio} - R_{risk-free}]}}. $$
 
 The risk-free rate return is sometimes taken as the LIBOR rate,
-the rate of 3 month T bill or the rate of a benchmark such as SPY. The risk-free
-rate is often approximated as 0 since the T bill rate has been near 0. However, 
+the rate of the 3 month T-bill or the rate of a benchmark such as SPY. The risk-free
+rate is often approximated as 0 since the T-bill rate has been near 0. However, 
 this appears to be changing in the near future. When the risk-free rate is constant,
 we can simplify the denominator:
 
@@ -623,9 +623,9 @@ Output
 dtype: float64
 ~~~
 
-Now lets put all of these statistics into a portfolio object; the stock values and symbols, allocations, value at
-position, the portfolio value, the daily returns, cumulative returns, average daily return,
-standard deviation of daily returns and the Sharpe ratio.
+Now lets put all of these statistics into a portfolio object; the stock values and symbols, the allocations, the value at
+position, the portfolio value, the daily returns, the cumulative returns, the average daily return,
+the standard deviation of daily returns and the Sharpe ratio.
 
 ~~~python
 import numpy as np
@@ -714,7 +714,7 @@ Name: 2016-12-30 00:00:00, dtype: float64
 <img src="/assets/images/trading_1/plot_10.png"/>
 
 Finally, we can optimize our portfolio! The easiest way is to maximize the cumulative return.
-To do this, we just check we stock has the greatest cumulative return and then put all of our
+To do this, we just check which stock has the greatest cumulative return and then put all of our
 money into that stock. That's kind of boring and not very insightful. Another way is to maximize
 the Sharpe ratio. Doing this will optimize our reward compared to risk. To do this we will
 use scipy's `minimize` method as most optimization routines only consider minimization problems.
