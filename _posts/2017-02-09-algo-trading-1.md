@@ -66,6 +66,8 @@ print("Seaborn version:          %6.6s  (my version: 0.7.1)" % seaborn.__version
 ~~~
 
 ~~~
+Output
+------
 Python version:            3.5.2  (my version: 3.5.2)
 Numpy version:             1.12.0 (my version: 1.12.0)
 SciPy version:             0.18.1 (my version: 0.18.1)
@@ -146,6 +148,8 @@ print(df.head())
 ~~~
 
 ~~~
+Output
+------
          Date        Open        High         Low       Close   Volume  \
 0  2016-01-04  743.000000  744.059998  731.257996  741.840027  3272800   
 1  2016-01-05  746.450012  752.000000  738.640015  742.580017  1950700   
@@ -202,6 +206,8 @@ print(df.head())
 ~~~
 
 ~~~
+Output
+------
                   AAPL         SPY         IBM        GOOG
 2016-01-04  102.612183  196.794026  129.932320  741.840027
 2016-01-05  100.040792  197.126874  129.836755  742.580017
@@ -267,10 +273,12 @@ methods to get the mean and standard deviation of the time series, or we can use
 
 ~~~python
 print("Mean\n" + "==================\n" + str(df.mean()))
-print("Standard deviation\n" + "===================\n" + str(df.std()))
+print("\nStandard deviation\n" + "===================\n" + str(df.std()))
 ~~~
 
 ~~~
+Output
+------
 Mean
 ==================
 AAPL    103.597547
@@ -278,6 +286,7 @@ SPY     206.868675
 IBM     146.922627
 GOOG    743.486707
 dtype: float64
+
 Standard deviation
 ===================
 AAPL     8.033139
@@ -292,6 +301,8 @@ print(df.describe())
 ~~~
 
 ~~~
+Output
+------
              AAPL         SPY         IBM        GOOG
 count  252.000000  252.000000  252.000000  252.000000
 mean   103.150329  206.868675  146.922627  743.486707
@@ -406,6 +417,8 @@ plot_data(cum_ret, title="Cumulative Returns")
 ~~~
 
 ~~~
+Output
+------
 AAPL    0.123843
 SPY     0.135858
 IBM     0.267489
@@ -495,22 +508,37 @@ plot_scatter(daily_ret, ['SPY', 'IBM'])
 
 Okay, finally we are done with all of our visualization functions. Let's now talk about
 optimizing a portfolio. To do this we will maximize the [Sharpe ratio](https://en.wikipedia.org/wiki/Sharpe_ratio),
-which measures the excess return per unit of deviation. The Sharpe ratio is sometimes referred
-to as the reward-to-variability ratio. More formally it is the ratio of the expected portfolio rate of return
-minus the risk-free rate of return divided by the standard deviation of portfolio rate of return minus the
-risk-free rate of return. The risk-free rate return is sometimes taken as the LIBOR rate,
+which measures the excess return per unit of deviation. The Sharpe ratio is commonly used as a measure for
+risk-adjusted return. 
+
+$$ \text{Sharpe Ratio}  = \frac{E[R_{portfolio} - R_{risk-free}]}{\sqrt{\text{var}[R_{portfolio} - R_{risk-free}]}}. $$
+
+The risk-free rate return is sometimes taken as the LIBOR rate,
 the rate of 3 month T bill or the rate of a benchmark such as SPY. The risk-free
-rate is often approximated as 0 since the T bill rate has been near 0 for so long. However, 
-this appears to be changing in the near future.
+rate is often approximated as 0 since the T bill rate has been near 0. However, 
+this appears to be changing in the near future. When the risk-free rate is constant,
+we can simplify the denominator:
+
+$$ \text{Sharpe Ratio}  = \frac{E[R_{portfolio} - R_{risk-free}]}{\sigma_{portfolio}}. $$
 
 The Sharpe ratio depends on how frequently we sample our data, that is daily, weekly, monthly, yearly, etc.
 We want to consider the Sharpe ratio is as an annual measure. In order to annualize it
 we need to modify it by a factor dependent on how we sampled our data. We are currently sampling
-our data daily, so we multiply the Sharpe ratio by a factor K=sqrt(252). The 252 comes from the
+our data daily, so we multiply the Sharpe ratio by a factor \$\$ K=\sqrt{252}. $$ The 252 comes from the
 fact that there are on average 252 [trading days](https://en.wikipedia.org/wiki/Trading_day) a year.
 The square root comes from the assumption that the volatility (standard deviation) of the stock
 scales with the square root of time. See [this](http://quant.stackexchange.com/questions/2260/how-to-annualize-sharpe-ratio)
 stackexchange post.
+
+Often it is the case that the risk-free rate is given yearly, so we want to convert it to
+a daily rate so that we can compare it with our daily returns. Following the effective interest
+formula:
+
+$$R_{annual} = (1 + R_{daily})^{252} - 1 $$
+
+we obtain:
+
+$$R_{daily}= (1 + R_{annual})^{\frac{1}{252}} - 1. $$
 
 ~~~python
 def compute_sharpe_ratio(daily_returns, annual_rf=0):
@@ -528,6 +556,8 @@ print(sharpe_ratio)
 ~~~
 
 ~~~
+Output
+------
 AAPL    0.616840
 SPY     1.046393
 IBM     1.301543
@@ -545,6 +575,8 @@ print(df_norm.head())
 ~~~
 
 ~~~
+Output
+------
                 AAPL       IBM      GOOG
 2016-01-04  1.000000  1.000000  1.000000
 2016-01-05  0.974941  0.999265  1.000998
@@ -563,6 +595,8 @@ print(position_value.head())
 ~~~
 
 ~~~
+Output
+------
                      AAPL            IBM           GOOG
 2016-01-04  500000.000000  300000.000000  200000.000000
 2016-01-05  487470.339612  299779.350511  200199.501233
@@ -579,6 +613,8 @@ print(port_value.head())
 ~~~
 
 ~~~
+Output
+------
 2016-01-04    1000000.000000
 2016-01-05     987449.194325
 2016-01-06     976689.361291
@@ -636,6 +672,8 @@ print("\nFinal Cumulative Return\n" + "===================\n" + str(pt.final_cum
 ~~~
 
 ~~~
+Output
+------
 Sharpe Ratio
 ==================
 Value    0.915735
@@ -660,6 +698,8 @@ pt.plot_vs_spy()
 ~~~
 
 ~~~
+Output
+------
 Sharpe Ratio
 ==================
 Value    0.47621
@@ -777,6 +817,8 @@ pt.analysis()
 ~~~
 
 ~~~
+Output
+------
 Start Date: 2016-01-03
 End Date: 2016-12-29
 Symbols: ['AAPL', 'IBM', 'GOOG']
@@ -795,6 +837,8 @@ pt.analysis()
 ~~~
 
 ~~~
+Output
+------
 Start Date: 2016-01-03
 End Date: 2016-12-29
 Symbols: ['AAPL', 'IBM', 'GOOG']
