@@ -4,7 +4,7 @@ title: Bio
 permalink: /bio/
 ---
 
-<img src="/assets/images/me.jpg" width="240"/>
+<img style="float: left; margin: 0px 20px 0px 0px" src="/assets/images/me_small.jpg"/>
 **Hello!** My name is Daniel Wood. I earned my Ph.D. in mathematics from the University
 of Texas at Arlington in 2015. As a graduate student I studied structure preserving numerical methods for 
 solving dynamical systems and the analysis of disease transmission models in the context
@@ -20,7 +20,6 @@ goal of finding ways to help fight the HIV epidemic.
 I enjoy recreational mathematics, participating in MOOCs, playing music, drinking coffee 
 and a large subset of the things people tend to like (e.g. movies, concerts, exercise).
 <BR CLEAR="left"/>
-<style> img { float: left; margin: 0 20px 20px 0; } </style>
 
 <div class="divider"></div>
 [Résumé (short) [pdf]](/assets/documents/resume_daniel_wood.pdf)<br>
