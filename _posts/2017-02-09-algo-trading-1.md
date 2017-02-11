@@ -64,7 +64,8 @@ print("Mapltolib version:        %6.6s  (my version: 2.0.0)" % matplotlib.__vers
 import seaborn
 print("Seaborn version:          %6.6s  (my version: 0.7.1)" % seaborn.__version__)
 ~~~
->~~~
+
+~~~
 Python version:            3.5.2  (my version: 3.5.2)
 Numpy version:             1.12.0 (my version: 1.12.0)
 SciPy version:             0.18.1 (my version: 0.18.1)
@@ -144,72 +145,21 @@ df = pd.read_csv(symbol_to_path('GOOG'))
 print(df.head())
 ~~~
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Date</th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Volume</th>
-      <th>Adj Close</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2016-01-04</td>
-      <td>743.000000</td>
-      <td>744.059998</td>
-      <td>731.257996</td>
-      <td>741.840027</td>
-      <td>3272800</td>
-      <td>741.840027</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2016-01-05</td>
-      <td>746.450012</td>
-      <td>752.000000</td>
-      <td>738.640015</td>
-      <td>742.580017</td>
-      <td>1950700</td>
-      <td>742.580017</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2016-01-06</td>
-      <td>730.000000</td>
-      <td>747.179993</td>
-      <td>728.919983</td>
-      <td>743.619995</td>
-      <td>1947000</td>
-      <td>743.619995</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2016-01-07</td>
-      <td>730.309998</td>
-      <td>738.500000</td>
-      <td>719.059998</td>
-      <td>726.390015</td>
-      <td>2963700</td>
-      <td>726.390015</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2016-01-08</td>
-      <td>731.450012</td>
-      <td>733.229980</td>
-      <td>713.000000</td>
-      <td>714.469971</td>
-      <td>2450900</td>
-      <td>714.469971</td>
-    </tr>
-  </tbody>
-</table>
+~~~
+         Date        Open        High         Low       Close   Volume  \
+0  2016-01-04  743.000000  744.059998  731.257996  741.840027  3272800   
+1  2016-01-05  746.450012  752.000000  738.640015  742.580017  1950700   
+2  2016-01-06  730.000000  747.179993  728.919983  743.619995  1947000   
+3  2016-01-07  730.309998  738.500000  719.059998  726.390015  2963700   
+4  2016-01-08  731.450012  733.229980  713.000000  714.469971  2450900   
+
+    Adj Close  
+0  741.840027  
+1  742.580017  
+2  743.619995  
+3  726.390015  
+4  714.469971  
+~~~
 
 The dataframe has seven columns, all of which tell us some interesting things about the
 stock, however we are going to only focus on two of them:
@@ -251,54 +201,14 @@ df = get_adj_close(symbols, start_date, end_date)
 print(df.head())
 ~~~
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>SPY</th>
-      <th>IBM</th>
-      <th>GOOG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2016-01-04</th>
-      <td>103.057063</td>
-      <td>196.794026</td>
-      <td>129.932320</td>
-      <td>741.840027</td>
-    </tr>
-    <tr>
-      <th>2016-01-05</th>
-      <td>100.474523</td>
-      <td>197.126874</td>
-      <td>129.836755</td>
-      <td>742.580017</td>
-    </tr>
-    <tr>
-      <th>2016-01-06</th>
-      <td>98.508268</td>
-      <td>194.640278</td>
-      <td>129.186847</td>
-      <td>743.619995</td>
-    </tr>
-    <tr>
-      <th>2016-01-07</th>
-      <td>94.350769</td>
-      <td>189.970552</td>
-      <td>126.979099</td>
-      <td>726.390015</td>
-    </tr>
-    <tr>
-      <th>2016-01-08</th>
-      <td>94.849671</td>
-      <td>187.885326</td>
-      <td>125.803548</td>
-      <td>714.469971</td>
-    </tr>
-  </tbody>
-</table>
+~~~
+                  AAPL         SPY         IBM        GOOG
+2016-01-04  102.612183  196.794026  129.932320  741.840027
+2016-01-05  100.040792  197.126874  129.836755  742.580017
+2016-01-06   98.083025  194.640278  129.186847  743.619995
+2016-01-07   93.943473  189.970552  126.979099  726.390015
+2016-01-08   94.440222  187.885326  125.803548  714.469971
+~~~
 
 Okay, enough looking at tables. Let's actually plot the data! To do this we will use
 matplotlib and seaborn.
@@ -322,6 +232,7 @@ The code:
 ~~~python
 with sns.plotting_context(font_scale=1.5, rc={"figure.figsize": size}), sns.axes_style("ticks"): 
 ~~~
+
 adjusts the font size, the figure size, and the plot style without changing the default
 settings in your main program. The `axes_style` method has several different style options
 which change how the figure looks. The `despine` method removes the borders.
@@ -358,7 +269,8 @@ methods to get the mean and standard deviation of the time series, or we can use
 print("Mean\n" + "==================\n" + str(df.mean()))
 print("Standard deviation\n" + "===================\n" + str(df.std()))
 ~~~
->~~~
+
+~~~
 Mean
 ==================
 AAPL    103.597547
@@ -378,75 +290,18 @@ dtype: float64
 ~~~python
 print(df.describe())
 ~~~
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>SPY</th>
-      <th>IBM</th>
-      <th>GOOG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>252.000000</td>
-      <td>252.000000</td>
-      <td>252.000000</td>
-      <td>252.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>103.597547</td>
-      <td>206.868675</td>
-      <td>146.922627</td>
-      <td>743.486707</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>8.033139</td>
-      <td>11.098166</td>
-      <td>12.838304</td>
-      <td>34.455758</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>89.394274</td>
-      <td>179.015794</td>
-      <td>113.783991</td>
-      <td>668.260010</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>95.808918</td>
-      <td>201.203923</td>
-      <td>142.010338</td>
-      <td>713.242493</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>104.201492</td>
-      <td>207.807558</td>
-      <td>149.054243</td>
-      <td>742.845001</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>110.293901</td>
-      <td>214.902820</td>
-      <td>156.587131</td>
-      <td>772.640000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>117.645979</td>
-      <td>226.425423</td>
-      <td>167.188056</td>
-      <td>813.109985</td>
-    </tr>
-  </tbody>
-</table>
+
+~~~
+             AAPL         SPY         IBM        GOOG
+count  252.000000  252.000000  252.000000  252.000000
+mean   103.150329  206.868675  146.922627  743.486707
+std      7.998461   11.098166   12.838304   34.455758
+min     89.008370  179.015794  113.783991  668.260010
+25%     95.395322  201.203923  142.010338  713.242493
+50%    103.751663  207.807558  149.054243  742.845001
+75%    109.817772  214.902820  156.587131  772.640000
+max    117.138118  226.425423  167.188056  813.109985
+~~~
 
 Some more interesting statistics are rolling statistcs such as the moving average. We will
 compute the average over a rolling window of say 20 days. That is we average day 1 through 20, 
@@ -550,7 +405,7 @@ print(cum_ret.ix[-1])
 plot_data(cum_ret, title="Cumulative Returns")
 ~~~
 
->~~~
+~~~
 AAPL    0.123843
 SPY     0.135858
 IBM     0.267489
@@ -672,7 +527,7 @@ sharpe_ratio = compute_sharpe_ratio(daily_ret)
 print(sharpe_ratio)
 ~~~
 
->~~~
+~~~
 AAPL    0.616840
 SPY     1.046393
 IBM     1.301543
@@ -686,51 +541,17 @@ of a portfolio by first normalizing the data:
 ~~~python
 port_symbols = ['AAPL', 'IBM', 'GOOG']
 df_norm = normalize_data(df_norm[port_symbols])
-print(df_norm.head().to_html())
+print(df_norm.head())
 ~~~
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>IBM</th>
-      <th>GOOG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2016-01-04</th>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>2016-01-05</th>
-      <td>0.974941</td>
-      <td>0.999265</td>
-      <td>1.000998</td>
-    </tr>
-    <tr>
-      <th>2016-01-06</th>
-      <td>0.955861</td>
-      <td>0.994263</td>
-      <td>1.002399</td>
-    </tr>
-    <tr>
-      <th>2016-01-07</th>
-      <td>0.915520</td>
-      <td>0.977271</td>
-      <td>0.979173</td>
-    </tr>
-    <tr>
-      <th>2016-01-08</th>
-      <td>0.920361</td>
-      <td>0.968224</td>
-      <td>0.963105</td>
-    </tr>
-  </tbody>
-</table>
+~~~
+                AAPL       IBM      GOOG
+2016-01-04  1.000000  1.000000  1.000000
+2016-01-05  0.974941  0.999265  1.000998
+2016-01-06  0.955861  0.994263  1.002399
+2016-01-07  0.915520  0.977271  0.979173
+2016-01-08  0.920361  0.968224  0.963105
+~~~
 
 multiplying the data by our initial allocations: 
 
@@ -741,48 +562,14 @@ position_value = df_norm * allocations * start_value
 print(position_value.head())
 ~~~
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AAPL</th>
-      <th>IBM</th>
-      <th>GOOG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2016-01-04</th>
-      <td>500000.000000</td>
-      <td>300000.000000</td>
-      <td>200000.000000</td>
-    </tr>
-    <tr>
-      <th>2016-01-05</th>
-      <td>487470.339612</td>
-      <td>299779.350511</td>
-      <td>200199.501233</td>
-    </tr>
-    <tr>
-      <th>2016-01-06</th>
-      <td>477930.697482</td>
-      <td>298278.781600</td>
-      <td>200479.879202</td>
-    </tr>
-    <tr>
-      <th>2016-01-07</th>
-      <td>457759.838353</td>
-      <td>293181.324708</td>
-      <td>195834.678249</td>
-    </tr>
-    <tr>
-      <th>2016-01-08</th>
-      <td>460180.351734</td>
-      <td>290467.101642</td>
-      <td>192621.035532</td>
-    </tr>
-  </tbody>
-</table>
+~~~
+                     AAPL            IBM           GOOG
+2016-01-04  500000.000000  300000.000000  200000.000000
+2016-01-05  487470.339612  299779.350511  200199.501233
+2016-01-06  477930.697482  298278.781600  200479.879202
+2016-01-07  457759.838353  293181.324708  195834.678249
+2016-01-08  460180.351734  290467.101642  192621.035532
+~~~
 
 and then summing up the value of all the stocks at each time point: 
 
@@ -791,36 +578,14 @@ port_value = position_value.sum(axis=1)
 print(port_value.head())
 ~~~
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2016-01-04</th>
-      <td>1000000.000000</td>
-    </tr>
-    <tr>
-      <th>2016-01-05</th>
-      <td>987449.191356</td>
-    </tr>
-    <tr>
-      <th>2016-01-06</th>
-      <td>976689.358283</td>
-    </tr>
-    <tr>
-      <th>2016-01-07</th>
-      <td>946775.841310</td>
-    </tr>
-    <tr>
-      <th>2016-01-08</th>
-      <td>943268.488908</td>
-    </tr>
-  </tbody>
-</table>
+~~~
+2016-01-04    1000000.000000
+2016-01-05     987449.194325
+2016-01-06     976689.361291
+2016-01-07     946775.843229
+2016-01-08     943268.494121
+dtype: float64
+~~~
 
 Now lets put all of these statistics into a portfolio object; the stock values and symbols, allocations, value at
 position, the portfolio value, the daily returns, cumulative returns, average daily return,
@@ -870,7 +635,7 @@ print("Sharpe Ratio\n" + "==================\n" + str(pt.sharpe_ratio))
 print("Final Cumulative Return\n" + "===================\n" + str(pt.sharpe_ratio))
 ~~~
 
->~~~
+~~~
 Sharpe Ratio
 ==================
 Value    0.915735
@@ -893,8 +658,8 @@ print("Final Cumulative Return\n" + "===================\n" + str(pt.sharpe_rati
 pt.plot_vs_spy()
 ~~~
 
->~~~
-harpe Ratio
+~~~
+Sharpe Ratio
 ==================
 Value    0.47621
 dtype: float64
@@ -1009,7 +774,7 @@ pt = Portfolio(df, port_symbols, start_value, allocations)
 print(pt.final_cum_return)
 ~~~
 
->~~~
+~~~
 Value    0.150251
 Name: 2016-12-30 00:00:00, dtype: float64
 ~~~
@@ -1019,7 +784,7 @@ pt.optimize()
 pt.analysis()
 ~~~
 
->~~~
+~~~
 Start Date: 2016-01-03
 End Date: 2016-12-29
 Symbols: ['AAPL', 'IBM', 'GOOG']
