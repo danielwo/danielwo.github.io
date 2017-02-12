@@ -142,7 +142,7 @@ On the other hand, we will assume low-risk individuals can have at most one part
 2. one short-term partner
 3. one long-term partner.
 
-Each partnership can have several characteristics. A partnership has some probability to break up, it can be a short- or long-term partnership,
+Each partnership can have several characteristics. A partnership can be a short- or long-term partnership,
 there will be some frequency of sex acts, there will be some frequency of condom use during sex, and there will be some frequency of anal
 sex given that a sexual act takes place. This last one is important because there is a greater risk of HIV transmission with anal sex as compared to vaginal sex. 
 
