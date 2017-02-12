@@ -363,7 +363,9 @@ simulations, but I figured these classes made sense as actual objects.
 
 Okay, now finally we'll create a participant class! For this, we will have to think a tiny bit about how the actual trial works, 
 which we haven't thought about very much yet. We will also have to explore how we want to store the partnership concurrency status of the
-participant. Another issue is that often participants aren't all enrolled at the same time, but tapered monthly as the trial goes on, 
+participant.
+
+Another issue is that often participants aren't all enrolled at the same time, but staggered monthly as the trial goes on, 
 and the participants are then followed. We could consider a fixed length trial design, where all participants will be followed for a 
 fixed amount of time or until infection. In this case, from the standpoint of the simulation, it doesn't matter if they are enrolled 
 all at once or in a stagged manner. However, for this example I decided on an event-driven trial structure. That is, we will follow 
