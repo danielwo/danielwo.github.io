@@ -1,11 +1,11 @@
 ---                                                                                       
-layout: post                                                                              
-title: "Let's Build a Clinical Trial Simulator (Part I)"                                
+layout: post
+title: "Let&apos;s Build a Clinical Trial Simulator (Part I)"
 description: "We use C++ to create a clinical trial simulator."
-comments: true                                                                            
+comments: true
 keywords: "c++, cpp, clinical trial, randomized, RCT, pre-exposure prophylaxis, PrEP, 
 HIV, AIDS, HIV/AIDS, human immunodeficiency virus, acquired immune deficiency syndrome,
-simulation"                                   
+simulation"
 ---  
 
 Let's build a clinical trial simulator! Why might we want to do this? Well, a few possible reasons:
