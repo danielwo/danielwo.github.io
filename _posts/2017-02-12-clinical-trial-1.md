@@ -528,6 +528,8 @@ int main() {
 	double analFrequency = 0.3;
 	
 	std::unique_ptr<Partnership> new_partnership =  std::make_unique<Partnership>(my_participant, my_partner, short_term, startDate, sexFrequency, condomFrequency, analFrequency);
+        // better update the concurrency status of the participant!
+        my_participant.UpdateConcurrencyStatus(ConcurrencyChange::new_short_term);
 
 	// initialize HIV/sex related parameters
 	double condomEfficacy = 0.9; // 90% effectiveness in preventing transmission
