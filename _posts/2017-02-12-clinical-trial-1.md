@@ -1,6 +1,6 @@
 ---                                                                                       
 layout: post
-title: "Let&apos;s Build a Clinical Trial Simulator (Part I)"
+title: "Building a Clinical Trial Simulator (Part I)"
 description: "We use C++ to create a clinical trial simulator."
 comments: true
 keywords: "c++, cpp, clinical trial, randomized, RCT, pre-exposure prophylaxis, PrEP, 
