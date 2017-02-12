@@ -291,8 +291,9 @@ enum PartnershipType { long_term, short_term };
 class Partnership {
 public:
 	// constructors
-	Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, boost::gregorian::date startDate,
-		double sexFrequency, double condomFrequency, double analFrequency);
+	Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, 
+                boost::gregorian::date startDate, double sexFrequency, double condomFrequency, 
+                double analFrequency);
 	
 	// getters
 	PartnershipType GetPartnershipType() const;
@@ -328,8 +329,9 @@ private:
 #include "Partnership.h"
 
 // constructors
-Partnership::Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, boost::gregorian::date startDate,
-	double sexFrequency, double condomFrequency, double analFrequency)
+Partnership::Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, 
+        boost::gregorian::date startDate, double sexFrequency, double condomFrequency, 
+        double analFrequency)
 	: m_participant(participant)
 	, m_partner(partner)
 	, m_startDate(startDate)
@@ -437,7 +439,8 @@ class Participant :
 	public Person {
 public:
 	// constructors
-	Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus);  // enrolled participant
+	Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
+        boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus);  // enrolled participant
 
 	// getters
 	Concurrency GetConcurrencyStatus() const;
@@ -468,7 +471,8 @@ private:
 #include "Participant.h"
 
 // constructors
-Participant::Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus)
+Participant::Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
+        boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus)
 	: Person(riskGroup) // we enroll healthy participants only
 	, m_trialArm(trialArm)
 	, m_isEnrolled(false) // we only enroll participants at their enrollment date
@@ -519,17 +523,20 @@ to simulate a sexual encounter:
 int main() {
 	boost::gregorian::date startDate = boost::gregorian::date(2017, boost::gregorian::Feb, 2); // start of trial
 	boost::gregorian::date maxFollowDate = startDate + boost::gregorian::months(12); 
-	Participant my_participant(low_risk, control, startDate, maxFollowDate, _0L0S); // enrollment date is start date, better enroll the participant!
+        // enrollment date is start date, better enroll the participant!
+	Participant my_participant(low_risk, control, startDate, maxFollowDate, _0L0S); 
 	my_participant.SetEnrollmentStatus(true);
 
-	boost::gregorian::date dateOfInfection = startDate - boost::gregorian::months(3); // infected 3 months ago!! (we aren't using this yet)
+        // infected 3 months ago!! (we aren't using this yet)
+	boost::gregorian::date dateOfInfection = startDate - boost::gregorian::months(3); 
 	Partner my_partner(high_risk, dateOfInfection, false); // infected but not on ART
 
 	double sexFrequency = 1;
 	double condomFrequency = 0.1;
 	double analFrequency = 0.3;
 	
-	std::unique_ptr<Partnership> new_partnership =  std::make_unique<Partnership>(my_participant, my_partner, short_term, startDate, sexFrequency, condomFrequency, analFrequency);
+	std::unique_ptr<Partnership> new_partnership =  std::make_unique<Partnership>(my_participant, 
+                my_partner, short_term, startDate, sexFrequency, condomFrequency, analFrequency);
         // better update the concurrency status of the participant!
         my_participant.UpdateConcurrencyStatus(ConcurrencyChange::new_short_term);
 
