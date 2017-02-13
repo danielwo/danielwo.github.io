@@ -434,7 +434,15 @@ of more than one stock. To do this we can create histograms and scatter plots. F
 make a histogram function which can plot multiple stocks. In the following code, whenever
 only one stock is passed in, the mean, standard deviation, and kurtosis is calculated.
 [Kurtosis](https://en.wikipedia.org/wiki/Kurtosis) is a measure of how fat the tails of the 
-distribution are. For comparison, the kurtosis of the normal distribution is 3.
+distribution are. For comparison, the kurtosis of the normal distribution is 3. 
+
+**CAUTION!** Here I noted that the kurtosis of the normal distribution is 3. However, before
+blindly applying a function, you should probably look at it's [documentation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.kurtosis.html).
+Here we find that we get the kurtosis using Fisher's definition of kurtosis where
+the kurtosis of a normal distribution is 0. If you dig deeper, you can find that
+pandas uses scipy's [kurtosis function](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.stats.kurtosis.html).
+We see that by default, the kurtosis function simply subtracts 3 from the original kurtosis.
+This is what we will use here.
 
 ~~~python
 def plot_hist(df, symbols, bins=20, title="Distribution of daily return", xlabel="Daily return", 
