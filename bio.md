@@ -21,8 +21,3 @@ goal of finding ways to help fight the HIV epidemic.
 I enjoy recreational mathematics, participating in MOOCs, playing music, drinking coffee 
 and a large subset of the things people tend to like (e.g. movies, concerts, exercise).
 <BR CLEAR="left"/>
-
-<div class="divider"></div>
-[Résumé (short) [pdf]](/assets/documents/resume_daniel_wood.pdf)<br>
-[Curriculum Vitae (long) [pdf]](/assets/documents/cv_daniel_wood.pdf)<br>
-[Research Statement [pdf]](/assets/documents/research_statement_daniel_wood.pdf)<br>
