@@ -414,7 +414,7 @@ enum class ConcurrencyChange  { // this will allow switching between different c
 ~~~
 
 Defining the enum class ConcurrencyChange, we can then just add the proposed "change in concurrency" to the current 
-concurrency, e.g. _0L1S + new_long_term = 1 + 4 = 5 = _1L1S. We just have to make sure we don't give any invalid
+concurrency, e.g. _0L1S + new_long_term = 1 + 3 = 4 = _1L1S. We just have to make sure we don't give any invalid
 changes.
 
 ~~~cpp
