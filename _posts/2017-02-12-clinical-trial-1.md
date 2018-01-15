@@ -523,8 +523,10 @@ private:
 Participant::Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
         boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus)
 	: Person(riskGroup) // we enroll healthy participants only
+	
 	, m_trialArm(trialArm)
 	, m_isEnrolled(false) // we only enroll participants at their enrollment date
+	
 	, m_enrollmentDate(enrollmentDate)
 	, m_maxFollowUpDate(maxFollowUpDate)
 	, m_concurrencyStatus(concurrencyStatus) {}
@@ -618,6 +620,7 @@ int main() {
 	// partnership sex
 	
 	boost::gregorian::date today = startDate; // date of sexual interaction
+	
 	Participant& current_participant = new_partnership->GetParticipantRef();
 	Partner& current_partner = new_partnership->GetPartnerRef();
 
