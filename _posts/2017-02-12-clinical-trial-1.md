@@ -78,6 +78,7 @@ public:
 private:
 	std::shared_ptr<std::mt19937> m_generator;
 	std::uniform_real_distribution<double> m_uniform; // this is the only distribution which is fixed at the start
+	
 };
 ~~~
 
@@ -239,7 +240,9 @@ public:
 	//constructors
 	
 	Partner(RiskGroup riskGroup); // create a partner with no HIV
+	
 	Partner(RiskGroup riskGroup, boost::gregorian::date dateOfInfection, bool onArt); // create a partner with HIV
+
 
 	// getters
 	
@@ -300,9 +303,13 @@ functions which act on the objects we're creating.
 ~~~cpp
 /* Partnership.h */
 #pragma once
+
 #include "RNG.h"
+
 #include "Participant.h"
+
 #include "Partner.h"
+
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
 
 
@@ -425,6 +432,7 @@ For this we will create a Concurrency enum:
 
 ~~~cpp
 enum Concurrency { _0L0S, _0L1S, _0L2S, _1L0S, _1L1S }; // number of partners 
+
 				// _xLyS  means x long_term partners and y short_term partners
 ~~~
 
@@ -478,6 +486,7 @@ public:
 	Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
         boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus);  // enrolled participant
 
+
 	// getters
 	
 	Concurrency GetConcurrencyStatus() const;
@@ -505,7 +514,7 @@ private:
 };
 ~~~
 
-~~~
+~~~cpp
 /* Participant.cpp */
 #include "Participant.h"
 
@@ -568,10 +577,12 @@ int main() {
 	
 	boost::gregorian::date maxFollowDate = startDate + boost::gregorian::months(12); 
         // enrollment date is start date, better enroll the participant!
+	
 	Participant my_participant(low_risk, control, startDate, maxFollowDate, _0L0S); 
 	my_participant.SetEnrollmentStatus(true);
 
         // infected 3 months ago!! (we aren't using this yet)
+	
 	boost::gregorian::date dateOfInfection = startDate - boost::gregorian::months(3); 
 	Partner my_partner(high_risk, dateOfInfection, false); // infected but not on ART
 	
@@ -583,9 +594,11 @@ int main() {
 	std::unique_ptr<Partnership> new_partnership =  std::make_unique<Partnership>(my_participant, 
                 my_partner, short_term, startDate, sexFrequency, condomFrequency, analFrequency);
         // better update the concurrency status of the participant!
+	
         my_participant.UpdateConcurrencyStatus(ConcurrencyChange::new_short_term);
 
 	// initialize HIV/sex related parameters
+	
 	double condomEfficacy = 0.9; // 90% effectiveness in preventing transmission
 	
 	double artEffiacy = 0.8; // efficacy of antiretroviral
@@ -624,6 +637,7 @@ int main() {
 
 		if (current_partner.OnArt()) {
 			hivTransmissionProbability *= (1 - artEffiacy); // reduce infectiousness
+			
 			std::cout << "Partner is on ART!" << std::endl;
 			std::cout << "hivTransmissionProbability = " << hivTransmissionProbability << std::endl;
 		}
@@ -631,6 +645,7 @@ int main() {
 		bool useCondom = my_rng.SampleBernoulliDistribution(new_partnership->GetCondomFrequency());
 		if (useCondom) {
 			hivTransmissionProbability *= (1-condomEfficacy); // reduce infectiousness
+			
 			std::cout << "Condom is used!" << std::endl;
 			std::cout << "hivTransmissionProbability = " << hivTransmissionProbability << std::endl;
 		}
@@ -638,6 +653,7 @@ int main() {
 		bool haveAnalSex = my_rng.SampleBernoulliDistribution(new_partnership->GetAnalFrequency());
 		if (haveAnalSex) {
 			hivTransmissionProbability *= analMultiplier; // increase infectiousness
+			
 			std::cout << "Partnership has anal sex!" << std::endl;
 			std::cout << "hivTransmissionProbability = " << hivTransmissionProbability << std::endl;
 		}
