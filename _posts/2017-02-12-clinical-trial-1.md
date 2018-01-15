@@ -72,7 +72,7 @@ public:
 	int SampleIntDistribution(std::uniform_int_distribution<int>& intDistribution);
 	double DetermineProbability(const double& baseProbability);
 private:
-	std::shared_ptr<std::mt19937> m_generator; // the shared pointer will let us use the same generator for 
+	std::shared_ptr<std::mt19937> m_generator; // the shared pointer will let us use the same generator for
 				 // multiple simulations, this is important for when we do model calibration
 	std::uniform_real_distribution<double> m_uniform; // this is the only distribution which is fixed at the start
 };
