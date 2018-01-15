@@ -72,14 +72,12 @@ public:
 	int SampleIntDistribution(std::uniform_int_distribution<int>& intDistribution);
 	double DetermineProbability(const double& baseProbability);
 private:
-	std::shared_ptr<std::mt19937> m_generator; // the shared pointer will let us use the same generator for
-				 // multiple simulations, this is important for when we do model calibration
+	std::shared_ptr<std::mt19937> m_generator;
 	std::uniform_real_distribution<double> m_uniform; // this is the only distribution which is fixed at the start
 };
 ~~~
 
-As you can see, we use a shared pointer for the RNG so that we can use the same generator in multiple simulations. Also, if we find we need
-access to more distributions, it should be easy to simply add them here.
+If we find we need access to more distributions, it should be easy to simply add them here.
 
 ~~~cpp
 /* RNG.cpp */
