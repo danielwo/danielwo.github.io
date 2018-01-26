@@ -232,6 +232,7 @@ here because we will remove participants from the trial whenever they become inf
 ~~~cpp
 /* Partner.h */
 #pragma once
+
 #include "Person.h"
 
 class Partner :
@@ -458,7 +459,9 @@ changes.
 ~~~cpp
 /* Participant.h */
 #pragma once
+
 #include "Person.h"
+
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
 
 
@@ -570,9 +573,13 @@ to simulate a sexual encounter:
 /* example_1.cpp */
 
 #include <iostream>
+
 #include <memory>
+
 #include "RNG.h"
+
 #include "Partnership.h"
+
 
 int main() {
 	boost::gregorian::date startDate = boost::gregorian::date(2017, boost::gregorian::Feb, 2); // start of trial
