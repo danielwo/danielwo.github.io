@@ -62,6 +62,7 @@ number of days.
 
 #include <memory> // used for shared pointer
 
+
 class RNG {
 public:
 	// constructors
@@ -248,6 +249,7 @@ private:
 ~~~cpp
 /* Partner.cpp */
 #include "Partner.h"
+
 
 // constructors
 Partner::Partner(RiskGroup riskGroup)
