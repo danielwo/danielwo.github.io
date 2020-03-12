@@ -228,7 +228,6 @@ class Partner :
 	public Person {
 public:
 	//constructors
-	
 	Partner(RiskGroup riskGroup); // create a partner with no HIV
 	Partner(RiskGroup riskGroup, boost::gregorian::date dateOfInfection, bool onArt); // create a partner with HIV
 
@@ -581,7 +580,7 @@ int main() {
 	double hivTransmissionProbability; 
 	if (current_partner.HasHiv()) {
 		hivTransmissionProbability = 0.15; // 15% base transmission probability (not realistic)
-		
+
 		std::cout << "Partner has HIV!" << std::endl;
 		std::cout << "hivTransmissionProbability = " << hivTransmissionProbability << std::endl;
 	}
