@@ -86,6 +86,7 @@ If we find we need access to more distributions, it should be easy to simply add
 /* RNG.cpp */
 #include "RNG.h"
 
+
 // constructors
 RNG::RNG(std::mt19937& generator)
 	: m_generator(std::make_shared<std::mt19937>(generator))
@@ -191,6 +192,7 @@ private:
 /* Person.cpp */
 #include "Person.h"
 
+
 // constructors
 Person::Person(RiskGroup riskGroup)
 	: m_riskGroup(riskGroup)
@@ -223,6 +225,7 @@ here because we will remove participants from the trial whenever they become inf
 #pragma once
 
 #include "Person.h"
+
 
 class Partner :
 	public Person {
@@ -287,9 +290,13 @@ functions which act on the objects we're creating.
 #pragma once
 
 #include "RNG.h"
+
 #include "Participant.h"
+
 #include "Partner.h"
+
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
+
 
 enum PartnershipType { long_term, short_term };
 
@@ -335,6 +342,7 @@ private:
 ~~~cpp
 /* Partnership.cpp */
 #include "Partnership.h"
+
 
 // constructors
 Partnership::Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, 
@@ -430,6 +438,7 @@ changes.
 #pragma once
 
 #include "Person.h"
+
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
 
 
@@ -482,6 +491,7 @@ private:
 /* Participant.cpp */
 #include "Participant.h"
 
+
 // constructors
 Participant::Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
         boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus)
@@ -528,8 +538,11 @@ to simulate a sexual encounter:
 /* example_1.cpp */
 
 #include <iostream>
+
 #include <memory>
+
 #include "RNG.h"
+
 #include "Partnership.h"
 
 
