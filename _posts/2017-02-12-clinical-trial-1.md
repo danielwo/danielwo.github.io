@@ -65,11 +65,9 @@ number of days.
 class RNG {
 public:
 	// constructors
-	
 	RNG(std::mt19937& generator);
 
 	//
-	
 	double SampleUniformDistribution();
 	bool SampleBernoulliDistribution(const double& probability);
 	int SampleDiscreteDistribution(std::discrete_distribution<int>& discreteDistribution);
@@ -89,13 +87,11 @@ If we find we need access to more distributions, it should be easy to simply add
 #include "RNG.h"
 
 // constructors
-
 RNG::RNG(std::mt19937& generator)
 	: m_generator(std::make_shared<std::mt19937>(generator))
 	, m_uniform(std::uniform_real_distribution<double>(0.0, 1.0)) {}
 
 //
-
 double RNG::SampleUniformDistribution() { return m_uniform(*m_generator); }
 
 bool RNG::SampleBernoulliDistribution(const double& probability) {
@@ -172,20 +168,16 @@ enum RiskGroup { low_risk, high_risk };
 class Person {
 public:
 	// constructors
-	
 	Person(RiskGroup riskGroup); // uninfected person
-	
 	Person(RiskGroup riskGroup, boost::gregorian::date m_dateOfInfection); // infected person
 
 
 	// getters
-	
 	RiskGroup GetRiskGroup() const;
 	bool Person::HasHiv() const;
 	boost::gregorian::date GetDateOfInfection() const;
 
 	// setters
-	
 	void Person::SetHivStatus(bool hivStatus);
 	void SetDateOfInfection(boost::gregorian::date currentDate);
 private:
@@ -200,7 +192,6 @@ private:
 #include "Person.h"
 
 // constructors
-
 Person::Person(RiskGroup riskGroup)
 	: m_riskGroup(riskGroup)
 	, m_hasHiv(false) {}
@@ -211,13 +202,11 @@ Person::Person(RiskGroup riskGroup, boost::gregorian::date dateOfInfection)
 	, m_dateOfInfection(dateOfInfection) {}
 
 // getters
-
 RiskGroup Person::GetRiskGroup() const { return m_riskGroup; }
 bool Person::HasHiv() const { return m_hasHiv; }
 boost::gregorian::date Person::GetDateOfInfection() const { return m_dateOfInfection; }
 
 // setters
-
 void Person::SetDateOfInfection(boost::gregorian::date currentDate) { m_dateOfInfection = currentDate; }
 void Person::SetHivStatus(bool hivStatus) { m_hasHiv = hivStatus; }
 ~~~
@@ -241,16 +230,13 @@ public:
 	//constructors
 	
 	Partner(RiskGroup riskGroup); // create a partner with no HIV
-	
 	Partner(RiskGroup riskGroup, boost::gregorian::date dateOfInfection, bool onArt); // create a partner with HIV
 
 
 	// getters
-	
 	bool OnArt() const;
 
 	// setters
-	
 	void SetArtStatus(bool artStatus);
 
 private:
@@ -263,7 +249,6 @@ private:
 #include "Partner.h"
 
 // constructors
-
 Partner::Partner(RiskGroup riskGroup)
 	: Person(riskGroup) {}
 
@@ -272,11 +257,9 @@ Partner::Partner(RiskGroup riskGroup, boost::gregorian::date dateOfInfection, bo
 	, m_onArt(onArt) {}
 
 // getters
-
 bool Partner::OnArt() const { return m_onArt; }
 
 // setters
-
 void Partner::SetArtStatus(bool artStatus) { m_onArt = artStatus; }
 ~~~
 
@@ -306,11 +289,8 @@ functions which act on the objects we're creating.
 #pragma once
 
 #include "RNG.h"
-
 #include "Participant.h"
-
 #include "Partner.h"
-
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
 
 
@@ -319,13 +299,11 @@ enum PartnershipType { long_term, short_term };
 class Partnership {
 public:
 	// constructors
-	
 	Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, 
                 boost::gregorian::date startDate, double sexFrequency, double condomFrequency, 
                 double analFrequency);
 	
 	// getters
-	
 	PartnershipType GetPartnershipType() const;
 	boost::gregorian::date GetStartDate() const;
 	double GetSexFrequency() const;
@@ -336,7 +314,6 @@ public:
 	bool breakUp() const;
 
 	// setters
-	
 	void SetPartnershipType(PartnershipType partnershipType);
 	void SetSexFrequency(double sexFrequency);
 	void SetCondomFrequency(double condomFrequency);
@@ -363,7 +340,6 @@ private:
 #include "Partnership.h"
 
 // constructors
-
 Partnership::Partnership(Participant& participant, Partner partner, PartnershipType partnershipType, 
         boost::gregorian::date startDate, double sexFrequency, double condomFrequency, 
         double analFrequency)
@@ -377,7 +353,6 @@ Partnership::Partnership(Participant& participant, Partner partner, PartnershipT
 	, m_breakUp(false) {}
 
 // getters
-
 PartnershipType Partnership::GetPartnershipType() const { return m_partnershipType; }
 boost::gregorian::date Partnership::GetStartDate() const { return m_startDate; }
 double Partnership::GetSexFrequency() const { return m_sexFrequency; }
@@ -388,7 +363,6 @@ Partner& Partnership::GetPartnerRef() { return m_partner; }
 bool Partnership::breakUp() const { return m_breakUp; }
 
 // setters
-
 void Partnership::SetPartnershipType(PartnershipType partnershipType) { m_partnershipType = partnershipType; }
 void Partnership::SetSexFrequency(double sexFrequency) { m_sexFrequency = sexFrequency; }
 void Partnership::SetCondomFrequency(double condomFrequency) { m_condomFrequency = condomFrequency; }
@@ -433,7 +407,6 @@ For this we will create a Concurrency enum:
 
 ~~~cpp
 enum Concurrency { _0L0S, _0L1S, _0L2S, _1L0S, _1L1S }; // number of partners 
-
 				// _xLyS  means x long_term partners and y short_term partners
 ~~~
 
@@ -442,7 +415,6 @@ turns from a short-term to a long-term partner, we want to be able to change the
 
 ~~~cpp
 enum class ConcurrencyChange  { // this will allow switching between different concurrency states easily
-
 	none = 0,
 	new_short_term = 1,
 	new_long_term = 3,
@@ -461,18 +433,14 @@ changes.
 #pragma once
 
 #include "Person.h"
-
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
 
 
 enum Arm { control, active }; // arm of the trial the participant is enrolled in
-
 enum Concurrency { _0L0S, _0L1S, _0L2S, _1L0S, _1L1S }; // number of partners 
-
 				// _xLyS  means x long_term partners and y short_term partners
 				
 enum class ConcurrencyChange  { // this will allow switching between different concurrency states easily
-
 	none = 0,
 	new_short_term = 1,
 	new_long_term = 3,
@@ -485,13 +453,11 @@ class Participant :
 	public Person {
 public:
 	// constructors
-	
 	Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
         boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus);  // enrolled participant
 
 
 	// getters
-	
 	Concurrency GetConcurrencyStatus() const;
 	Arm GetTrialArm() const;
 	boost::gregorian::date GetMaxFollowUpDate() const;
@@ -499,13 +465,11 @@ public:
 	bool IsEnrolled() const;
 
 	// setters
-	
 	void SetTrialArm(Arm trialArm);
 	void SetEnrollmentDate(boost::gregorian::date enrollmentDate);
 	void SetEnrollmentStatus(bool enrollmentStatus);
 
 	//
-	
 	void UpdateConcurrencyStatus(ConcurrencyChange concurrencyChange);
 private:
 	boost::gregorian::date m_dateOfInfection;
@@ -522,20 +486,16 @@ private:
 #include "Participant.h"
 
 // constructors
-
 Participant::Participant(RiskGroup riskGroup, Arm trialArm, boost::gregorian::date enrollmentDate, 
         boost::gregorian::date maxFollowUpDate, Concurrency concurrencyStatus)
 	: Person(riskGroup) // we enroll healthy participants only
-	
 	, m_trialArm(trialArm)
 	, m_isEnrolled(false) // we only enroll participants at their enrollment date
-	
 	, m_enrollmentDate(enrollmentDate)
 	, m_maxFollowUpDate(maxFollowUpDate)
 	, m_concurrencyStatus(concurrencyStatus) {}
 
 // getters
-
 Concurrency Participant::GetConcurrencyStatus() const { return m_concurrencyStatus; }
 Arm Participant::GetTrialArm() const { return m_trialArm; }
 boost::gregorian::date Participant::GetEnrollmentDate() const { return m_enrollmentDate; }
@@ -543,13 +503,11 @@ boost::gregorian::date Participant::GetMaxFollowUpDate() const { return m_maxFol
 bool Participant::IsEnrolled() const { return m_isEnrolled; }
 
 // setters
-
 void Participant::SetEnrollmentStatus(bool enrollmentStatus) { m_isEnrolled = enrollmentStatus; }
 void Participant::SetTrialArm(Arm trialArm) { m_trialArm = trialArm; }
 void Participant::SetEnrollmentDate(boost::gregorian::date enrollmentDate) { m_enrollmentDate = enrollmentDate; }
 
 //
-
 void Participant::UpdateConcurrencyStatus(ConcurrencyChange concurrencyChange) {
 	int newConcurrency = m_concurrencyStatus + static_cast<int>(concurrencyChange);
 	if (0 <= newConcurrency && newConcurrency <= 4)
@@ -573,11 +531,8 @@ to simulate a sexual encounter:
 /* example_1.cpp */
 
 #include <iostream>
-
 #include <memory>
-
 #include "RNG.h"
-
 #include "Partnership.h"
 
 
@@ -585,47 +540,39 @@ int main() {
 	boost::gregorian::date startDate = boost::gregorian::date(2017, boost::gregorian::Feb, 2); // start of trial
 	
 	boost::gregorian::date maxFollowDate = startDate + boost::gregorian::months(12); 
-        // enrollment date is start date, better enroll the participant!
-	
+    
+	// enrollment date is start date, better enroll the participant!
 	Participant my_participant(low_risk, control, startDate, maxFollowDate, _0L0S); 
 	my_participant.SetEnrollmentStatus(true);
-
-        // infected 3 months ago!! (we aren't using this yet)
-	
+    
+	// infected 3 months ago!! (we aren't using this yet)
 	boost::gregorian::date dateOfInfection = startDate - boost::gregorian::months(3); 
 	Partner my_partner(high_risk, dateOfInfection, false); // infected but not on ART
 	
-
 	double sexFrequency = 1;
 	double condomFrequency = 0.1;
 	double analFrequency = 0.3;
 	
 	std::unique_ptr<Partnership> new_partnership =  std::make_unique<Partnership>(my_participant, 
                 my_partner, short_term, startDate, sexFrequency, condomFrequency, analFrequency);
-        // better update the concurrency status of the participant!
-	
-        my_participant.UpdateConcurrencyStatus(ConcurrencyChange::new_short_term);
+
+    // better update the concurrency status of the participant!
+    my_participant.UpdateConcurrencyStatus(ConcurrencyChange::new_short_term);
 
 	// initialize HIV/sex related parameters
-	
 	double condomEfficacy = 0.9; // 90% effectiveness in preventing transmission
-	
 	double artEffiacy = 0.8; // efficacy of antiretroviral
-	
 	double analMultiplier = 5; // 5x infectiousness on anal intercourse
 
 
 	// set up simple seed with mersenne twister RNG
-	
 	// std::mt19937 my_rng(std::random_device{}());
-	
 	unsigned seed = 3;
 	std::mt19937 my_generator(seed); 
 	RNG my_rng(my_generator);
 
 	/*********************************************************************/
 	// partnership sex
-	
 	boost::gregorian::date today = startDate; // date of sexual interaction
 	
 	Participant& current_participant = new_partnership->GetParticipantRef();
@@ -640,7 +587,6 @@ int main() {
 	}
 
 	// if the partner does not have HIV, no reason to have sex. Can save computing time here!
-	
 	bool haveSex = my_rng.SampleBernoulliDistribution(new_partnership->GetSexFrequency());
 	if (haveSex) {
 		std::cout << "Partnership has sex!" << std::endl;
