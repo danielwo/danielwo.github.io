@@ -231,7 +231,6 @@ public:
 	Partner(RiskGroup riskGroup); // create a partner with no HIV
 	Partner(RiskGroup riskGroup, boost::gregorian::date dateOfInfection, bool onArt); // create a partner with HIV
 
-
 	// getters
 	bool OnArt() const;
 
@@ -291,7 +290,6 @@ functions which act on the objects we're creating.
 #include "Participant.h"
 #include "Partner.h"
 #include "boost/date_time/gregorian/gregorian.hpp" // used for dates
-
 
 enum PartnershipType { long_term, short_term };
 
