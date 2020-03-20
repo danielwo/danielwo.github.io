@@ -31,9 +31,9 @@ sass:
 author:
   name     : "Daniel Wood"
   job      : "Mathematician"
-  bio      : "I work in the modelling of HIV transmission dynamics."
+  bio      : "I do data science-y stuff."
   thumb    : /images/me.jpg
-  email    : dwood@fredhutch.org
+  email    : danwoodphd@gmail.com
   url      : http://danielwo.github.io
   github   : http://github.com/danielwo
   twitter  : http://twitter.com/doct0r_dan

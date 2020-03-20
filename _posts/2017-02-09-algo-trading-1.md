@@ -680,12 +680,14 @@ class Portfolio:
         self.cum_returns = compute_cum_returns(self.value)
         self.final_cum_return = self.cum_returns.ix[-1]
         self.avg_daily_return = self.daily_returns[1:].mean() # ignore first 0 element for computing stats
+
         self.std_daily_return = self.daily_returns[1:].std()
         self.sharpe_ratio = compute_sharpe_ratio(self.daily_returns[1:])
 
     def plot_vs_spy(self):
         """Plot daily portfolio value against SPY value"""
         # First concatenate the portfolio value with the SPY value and normalize
+
         comparison_df = normalize_data(pd.concat([self.value, self.df['SPY']], axis=1))
         comparison_df = comparison_df.rename(columns = {'Value':'Portfolio'})
         plot_data(comparison_df, title="Daily portfolio value and SPY", xlabel="Date", ylabel="Price", size=(12,9))
@@ -696,7 +698,9 @@ Of particular interest is the Sharpe ratio and the final cumulative return of ou
 ~~~python
 port_symbols = ['AAPL', 'IBM', 'GOOG']
 start_value = 1000000 # initial amount of money to invest
+
 allocations = [0.5, 0.3, 0.2] # must add to 1
+
 pt = Portfolio(df, port_symbols, start_value, allocations)
 print("Sharpe Ratio\n" + "==================\n" + str(pt.sharpe_ratio))
 print("\nFinal Cumulative Return\n" + "===================\n" + str(pt.final_cum_return))
@@ -762,10 +766,15 @@ that the initial allocations to each stock most be between 0 and 1, and also mus
     def optimize(self):
         """Optimize portfolio based on Sharpe Ratio"""
         # optimize for negative sharpe ratio
+
         n = len(self.df[self.symbols].columns) # number of stocks
+
         allocations = np.ones(n)*(1.0/n) # give each stock an equal starting allocation  
+
         constraints = ({'type': 'eq', 'fun': lambda x:  1 - sum(x)})  # allocations must sum to 1   
+
         bounds = tuple((0,1) for x in allocations) # Required to have values between 0 and 1
+
         opt_stats = minimize(self.opt_sharpe_ratio, allocations, method='SLSQP', bounds=bounds ,constraints=constraints)
         self.update(opt_stats.x) # x is the container for the optimized allocations
 ~~~
@@ -794,6 +803,7 @@ class Portfolio:
         self.cum_returns = compute_cum_returns(self.value)
         self.final_cum_return = self.cum_returns.ix[-1]
         self.avg_daily_return = self.daily_returns[1:].mean() # ignore first 0 element for computing stats
+
         self.std_daily_return = self.daily_returns[1:].std()
         self.sharpe_ratio = compute_sharpe_ratio(self.daily_returns[1:])
     
@@ -805,16 +815,23 @@ class Portfolio:
     def optimize(self):
         """Optimize portfolio based on Sharpe Ratio"""
         # optimize for negative sharpe ratio
+
         n = len(self.df[self.symbols].columns) # number of stocks
+
         allocations = np.ones(n)*(1.0/n) # give each stock an equal starting allocation  
+
         constraints = ({'type': 'eq', 'fun': lambda x:  1 - sum(x)})  # allocations must sum to 1   
+
         bounds = tuple((0,1) for x in allocations) # Required to have values between 0 and 1
+
         opt_stats = minimize(self.opt_sharpe_ratio, allocations, method='SLSQP', bounds=bounds ,constraints=constraints)
         self.update(opt_stats.x) # x is the container for the optimized allocations
     
+
     def get_stats(self):
         """Print out portfolio statistics"""
         # np.datetime_as_string(self.df.index.values[0], timezone='local')[:10] is a hack to get the date      
+
         print("Start Date: " + np.datetime_as_string(self.df.index.values[0], timezone='local')[:10]) 
         print("End Date: " + np.datetime_as_string(self.df.index.values[-1], timezone='local')[:10])
         print("Symbols: " + str(self.symbols))
@@ -827,6 +844,7 @@ class Portfolio:
     def plot_vs_spy(self):
         """Plot daily portfolio value against SPY value"""
         # First concatenate the portfolio value with the SPY value and normalize
+
         comparison_df = normalize_data(pd.concat([self.value, self.df['SPY']], axis=1))
         comparison_df = comparison_df.rename(columns = {'Value':'Portfolio'})
         plot_data(comparison_df, title="Daily portfolio value and SPY", xlabel="Date", ylabel="Price", size=(12,9))
@@ -842,7 +860,9 @@ Now we can optimize our portfolio:
 ~~~python
 port_symbols = ['AAPL', 'IBM', 'GOOG']
 start_value = 1000000 # initial amount of money to invest
+
 allocations = [0.1, 0.2, 0.7] # must add to 1
+
 pt = Portfolio(df, port_symbols, start_value, allocations)
 pt.analysis()
 ~~~
