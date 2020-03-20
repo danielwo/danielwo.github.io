@@ -620,7 +620,9 @@ multiplying the data by our initial allocations:
 
 ~~~python
 start_value = 1000000 # initial amount of money to invest
+
 allocations = [0.5, 0.3, 0.2] # must add to 1
+
 position_value = df_norm * allocations * start_value
 print(position_value.head())
 ~~~
