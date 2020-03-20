@@ -38,29 +38,36 @@ I will be using Python 3 to do this analysis. You can find the python files asso
 ~~~python
 import sys
 # Get python version :D
+
 print("Python version:            %6.6s (my version: 3.5.2)" % sys.version)
 
 # Numpy is a library for working with Arrays
+
 import numpy as np
 print("Numpy version:             %6.6s (my version: 1.12.0)" % np.__version__)
 
 # SciPy implements many different numerical algorithms
+
 import scipy as sp
 print("SciPy version:             %6.6s (my version: 0.18.1)" % sp.__version__)
 
 # Pandas makes working with data tables easier
+
 import pandas as pd
 print("Pandas version:            %6.6s (my version: 0.19.2)" % pd.__version__)
 
 # Pandas_datareader makes downloading stock market data easy
+
 import pandas_datareader as web
 print("Pandas_datareader version: %6.6s (my version: 0.3.0)" % web.__version__)
 
 # Module for plotting
+
 import matplotlib
 print("Mapltolib version:        %6.6s  (my version: 2.0.0)" % matplotlib.__version__)
 
 # Seaborn makes matplotlib look good and provides some plotting functions
+
 import seaborn
 print("Seaborn version:          %6.6s  (my version: 0.7.1)" % seaborn.__version__)
 ~~~
@@ -113,6 +120,7 @@ def scrape_stock_data(symbols, start, end, interval='d', base_dir="stock_data"):
     """Get yahoo stock data from the web and save it as .csv files"""
     if isinstance(symbols, str): 
         symbols = [symbols] # if string is passed in, place it in a list
+
         
     for symbol in symbols:
         df = web.get_data_yahoo(symbol, start = start, end = end, interval=interval)
@@ -135,6 +143,7 @@ now we can get data for our favorite stocks!
 ~~~python
 symbols = ['AAPL', 'SPY', 'IBM', 'GOOG']
 start_date = '2016-01-01' # dates should be in YYYY-MM-DD format, or a datetime object.
+
 end_date = '2016-12-31'
 scrape_stock_data(symbols, start_date, end_date)
 ~~~
@@ -184,10 +193,12 @@ def get_adj_close(symbols, start, end):
     """Read stock data (adjusted close) for given symbols from CSV files.""" 
     if isinstance(symbols, str): 
         symbols = [symbols] # if string is passed in, place it in a list
+
         
     dates = pd.date_range(start, end).date
     df = pd.DataFrame(index=dates)
     if 'SPY' not in symbols:  # add SPY for reference, if absent
+
         symbols.insert(0, 'SPY')
 
     for symbol in symbols:
@@ -195,6 +206,7 @@ def get_adj_close(symbols, start, end):
                               parse_dates=True, usecols=['Date','Adj Close'])
         df_temp = df_temp.rename(columns={'Adj Close': symbol})
         df = df.join(df_temp) # use default how='left' 
+
         
     df = df.dropna()
     return df
@@ -228,6 +240,7 @@ def plot_data(df, title="Adjusted Close", xlabel="Date", ylabel="Price", size=(1
     with sns.plotting_context(font_scale=1.5, rc={"figure.figsize": size}), sns.axes_style("ticks"):       
         ax = df.plot(title=title)
         sns.despine() # remove top and right borders
+
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
         plt.show()
@@ -353,6 +366,7 @@ def plot_bollinger_bands(df, symbol, window=20):
     with sns.plotting_context(font_scale=1.5, rc={"figure.figsize": (12,9)}), sns.axes_style("ticks"):  
         ax = df[symbol].plot(title="Bollinger Bands", label=symbol)
         sns.despine() # remove top and right borders
+
         rm.plot(color='firebrick',label='Rolling mean', ax=ax)
         upper_band.plot(label='',color='gray', ax=ax)
         lower_band.plot(label='',color='gray', ax=ax)
@@ -450,7 +464,9 @@ def plot_hist(df, symbols, bins=20, title="Distribution of daily return", xlabel
     """Plot Histogram"""
     if isinstance(symbols, str): 
         symbols = [symbols] # if string is passed in, place it in a list 
+
     if len(symbols) != 1:  # don't plot stats if there is more than one histogram
+
         plot_stat=False
     
     with sns.plotting_context(font_scale=1.5, rc={"figure.figsize": size}), sns.axes_style("ticks"):    
@@ -465,7 +481,9 @@ def plot_hist(df, symbols, bins=20, title="Distribution of daily return", xlabel
                 plt.axvline(mean-std, color='r', label='', linestyle='dashed', linewidth=2)
                 plt.axvline(mean, visible=False, label='kurtosis = ' + str(round(kurtosis,3)), \
                             linestyle='dashed', linewidth=2) # hack to get kurtosis to show in legend
+
         sns.despine() # remove top and right borders
+
         plt.title(title)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
@@ -497,6 +515,7 @@ def plot_scatter(df, symbols, title="Daily return", size=(9,9)):
         y = df[symbols[1]]
         g = sns.JointGrid(x, y, ratio=100)
         sns.despine() # remove top and right borders
+
         g.plot_joint(sns.regplot)
         g.annotate(stats.pearsonr)
         g.ax_marg_x.set_axis_off()
@@ -552,9 +571,13 @@ $$R_{daily}= (1 + R_{annual})^{\frac{1}{252}} - 1. $$
 def compute_sharpe_ratio(daily_returns, annual_rf=0):
     """Computes Sharpe Ratio based on a daily approximation"""
     # annual_rf = 0 is an approximation of annual risk free rate
+
     daily_rf = (1 + annual_rf)**(1/252) - 1 # approximation based on interest rate and 252 trading days
+
     K = (252)**(1/2) # assumes daily data
+
     sharpe_ratio = K *(daily_returns - daily_rf).mean() / daily_returns.std() # assuming daily_rf is constant
+
     return sharpe_ratio
 ~~~
 
